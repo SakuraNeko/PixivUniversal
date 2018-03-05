@@ -402,20 +402,11 @@
     <comment>为Microsoft Band添加 Pixiv Tile</comment>
   </data>
   <data name="PopupContent" xml:space="preserve">
-    <value>[Features] New Water-fall Customization feature in settings;
-[Features] Vote feature support added；
-[Features] Upgrade to new API for better statability；
-[UI] Redesign the work detail page；
-[Fixes] Fix an issue that caused unexpectedly data usage when downloading illusts in cellular connection；
-[Fixes] Fix an issue that may cause the Ranking illust page failed to load；
-[Fixes] Fix an issue that you can "login" (faked) even without entering usrname and passwd;
-[Fixes] Fix some Illust-Flow setting page errors;
-[Fixes] Fix a bug, which results in inbox being filled with a lot of Pixiv Emails;
-[Localization] Added basically support for Korean(We need Korean translation to help us complete localization.);</value>
+    <value>We fixed an issue which may cause not being able to login on some devices. Hope this'll work (we're not 100% percent sure, bucause we can't reproduce the bug, thus can't test our patch).</value>
     <comment>更新内容</comment>
   </data>
   <data name="PopupTitle" xml:space="preserve">
-    <value>버전 V1.4.3β는 내용을 업데이트합니다</value>
+    <value>버전 V1.4.4β는 내용을 업데이트합니다</value>
     <comment>更新内容弹出标题</comment>
   </data>
   <data name="Rank" xml:space="preserve">

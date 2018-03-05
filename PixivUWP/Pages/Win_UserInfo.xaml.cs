@@ -273,7 +273,7 @@ namespace PixivUWP.Pages
                     }
                     btn_Pin.IsChecked = await Data.AppDataHelper.checkContactAsync(contact);
                     pinned = btn_Pin.IsChecked.Value;
-                    btn_Pin.IsEnabled = true;
+                    //btn_Pin.IsEnabled = true;
                 }
                 if (newuserinfo.profile != null)
                 {

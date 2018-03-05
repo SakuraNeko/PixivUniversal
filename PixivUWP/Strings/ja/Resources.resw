@@ -343,20 +343,11 @@
     <comment>搜索筛选条件</comment>
   </data>
   <data name="PopupContent" xml:space="preserve">
-    <value>「新機能」 設定でウォーターフローをカスタマイズしましょう～
-「新機能」 投票機能のサポート
-「新機能」 新しいAPIをアップグレードし、動作安定性を改善します
-「UI」 イラスト情報ページを再設計します
-「修復」 ダウンロード際に予期せずなモバイルデータ使用量を引き起こした問題を修正しました
-「修復」 人気作品ページが読み込まれなかったの問題を修正しました
-「修復」 仮登録（ログイン情報がないの場合）もうなくなります
-「修復」 ウォーターフローの設定エラーを修正しました
-「修復」 基本的な韓国語サポート
-「修復」Fix a bug, which results in inbox being filled with a lot of Pixiv Emails;</value>
+    <value>We fixed an issue which may cause not being able to login on some devices. Hope this'll work (we're not 100% percent sure, bucause we can't reproduce the bug, thus can't test our patch).</value>
     <comment>更新内容</comment>
   </data>
   <data name="PopupTitle" xml:space="preserve">
-    <value>バージョンV1.4.3β更新されたコンテンツ</value>
+    <value>バージョンV1.4.4β更新されたコンテンツ</value>
     <comment>更新内容弹出标题</comment>
   </data>
   <data name="comboLoadPolicy.Header" xml:space="preserve">

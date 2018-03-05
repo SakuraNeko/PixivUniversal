@@ -342,20 +342,11 @@
     <comment>搜索筛选条件</comment>
   </data>
   <data name="PopupContent" xml:space="preserve">
-    <value>【功能】可以在設置中調整瀑布流設置了；
-【功能】新增了支援使用者投票的功能；
-【功能】更新了API版本，保證訪問穩定；
-【介面】重寫了作品詳情頁面；
-【修復】修正了在流量下下載圖片耗費流量的問題；
-【修復】修復了熱門圖片無法載入的問題；
-【修復】修復了不輸入帳戶和密碼即可發起「假」登錄的問題；
-【修復】解決了瀑布流設置的一些異常問題；
-【修復】解決了使用者遇到的大量Pixiv郵件問題；
-【翻譯】新增了基本的韓語翻譯；</value>
+    <value>We fixed an issue which may cause not being able to login on some devices. Hope this'll work (we're not 100% percent sure, bucause we can't reproduce the bug, thus can't test our patch).</value>
     <comment>更新内容</comment>
   </data>
   <data name="PopupTitle" xml:space="preserve">
-    <value>版本 V1.4.3β更新内容</value>
+    <value>版本 V1.4.4β更新内容</value>
     <comment>更新内容弹出标题</comment>
   </data>
   <data name="comboLoadPolicy.Header" xml:space="preserve">

@@ -342,20 +342,11 @@
     <comment>搜索筛选条件</comment>
   </data>
   <data name="PopupContent" xml:space="preserve">
-    <value>[Features] New Water-fall Customization feature in settings;
-[Features] Vote feature support added；
-[Features] Upgrade to new API for better statability；
-[UI] Redesign the work detail page；
-[Fixes] Fix an issue that caused unexpectedly data usage when downloading illusts in cellular connection；
-[Fixes] Fix a bug, which results in inbox being filled with a lot of Pixiv Emails;
-[Fixes] Fix an issue that may cause the Ranking illust page failed to load；
-[Fixes] Fix an issue that you can "login" (faked) even without entering usrname and passwd;
-[Fixes] Fix some Illust-Flow setting page errors;
-[Localization] Added basically support for Korean;</value>
+    <value>We fixed an issue which may cause not being able to login on some devices. Hope this'll work (we're not 100% percent sure, bucause we can't reproduce the bug, thus can't test our patch).</value>
     <comment>更新内容</comment>
   </data>
   <data name="PopupTitle" xml:space="preserve">
-    <value>Update: V1.4.3β</value>
+    <value>Update: V1.4.4β</value>
     <comment>更新内容弹出标题</comment>
   </data>
   <data name="comboLoadPolicy.Header" xml:space="preserve">
