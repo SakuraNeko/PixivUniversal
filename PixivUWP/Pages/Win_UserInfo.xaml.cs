@@ -24,8 +24,10 @@ using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
 using System.Threading.Tasks;
+using Windows.ApplicationModel.Contacts;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Windows.Storage.Streams;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
@@ -246,7 +248,7 @@ namespace PixivUWP.Pages
             try
             {
                 pivot.Title = pix_user.Name + (!string.IsNullOrEmpty(pix_user.Email) ? "(" + pix_user.Email + ")" : string.Empty);
-
+                btn_Pin.IsEnabled = false;
                 //string imgurl = pix_user.ProfileImageUrls.Px170x170 ?? pix_user.ProfileImageUrls.Px50x50 ?? pix_user.ProfileImageUrls.Px16x16;
                 var newuserinfo = await Data.TmpData.CurrentAuth.Tokens.GetUserInfoAsync(pix_user.Id.Value.ToString());
                 //if (imgurl==null)
@@ -259,6 +261,19 @@ namespace PixivUWP.Pages
                     var bitmap = new Windows.UI.Xaml.Media.Imaging.BitmapImage();
                     await bitmap.SetSourceAsync((await res.GetResponseStreamAsync()).AsRandomAccessStream());
                     userpro.ImageSource = bitmap;
+                    //contact.Id = "PIXIV!" + pix_user.Id.ToString();
+                    contact.RemoteId = "PIXIV!" + pix_user.Id.ToString();
+                    contact.Name = pix_user.Name;
+                    //contact.SourceDisplayPicture = RandomAccessStreamReference.CreateFromStream((await res.GetResponseStreamAsync()).AsRandomAccessStream());
+                    if (pix_user.Email != null)
+                    {
+                        ContactEmail contactEmail = new ContactEmail();
+                        contactEmail.Address = pix_user.Email;
+                        contact.Emails.Add(contactEmail);
+                    }
+                    btn_Pin.IsChecked = await Data.AppDataHelper.checkContactAsync(contact);
+                    pinned = btn_Pin.IsChecked.Value;
+                    //btn_Pin.IsEnabled = true;
                 }
                 if (newuserinfo.profile != null)
                 {
@@ -342,6 +357,15 @@ namespace PixivUWP.Pages
                     var result_fav = firstLoadAsync_fav();
                     break;
             }
+        }
+
+
+        private bool pinned = false;
+        Contact contact = new Contact();
+        private void btn_Pin_Click(object sender, RoutedEventArgs e)
+        {
+            if (!pinned) Data.AppDataHelper.PinContact(contact);
+            else Data.AppDataHelper.UnpinContact(contact);
         }
     }
 }

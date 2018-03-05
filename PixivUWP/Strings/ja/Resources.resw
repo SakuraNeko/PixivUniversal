@@ -343,11 +343,11 @@
     <comment>搜索筛选条件</comment>
   </data>
   <data name="PopupContent" xml:space="preserve">
-    <value>これは内部ベータ版ですが、主な改善点は次のとおりです。</value>
+    <value>We fixed an issue which may cause not being able to login on some devices. Hope this'll work (we're not 100% percent sure, bucause we can't reproduce the bug, thus can't test our patch).</value>
     <comment>更新内容</comment>
   </data>
   <data name="PopupTitle" xml:space="preserve">
-    <value>バージョンV1.3.5β更新されたコンテンツ</value>
+    <value>バージョンV1.4.4β更新されたコンテンツ</value>
     <comment>更新内容弹出标题</comment>
   </data>
   <data name="comboLoadPolicy.Header" xml:space="preserve">

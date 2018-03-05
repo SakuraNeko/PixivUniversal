@@ -158,7 +158,7 @@
     <comment>缩小按钮文字</comment>
   </data>
   <data name="aboutText1.Text" xml:space="preserve">
-    <value>这是一个使用C#语言编写的，基于Pixiv网站的第三方应用。</value>
+    <value>This is a 3rd-party client for Pixiv.net, based on C#.</value>
     <comment>关于说明</comment>
   </data>
   <data name="aboutText2.Text" xml:space="preserve">
@@ -190,15 +190,15 @@
     <comment>登出确认提示文字</comment>
   </data>
   <data name="backPolicy1.Content" xml:space="preserve">
-    <value>仅非按流量计费的连接</value>
+    <value>Only using non-traffic-based connections</value>
     <comment>后台策略描述</comment>
   </data>
   <data name="backPolicy2.Content" xml:space="preserve">
-    <value>根据你的流量使用情况</value>
+    <value>According to your traffic usage</value>
     <comment>后台策略描述</comment>
   </data>
   <data name="backPolicy3.Content" xml:space="preserve">
-    <value>除非你启用了“限制后台数据”</value>
+    <value>Unless you enabled “Restrict background data”</value>
     <comment>后台策略描述</comment>
   </data>
   <data name="backPolicy4.Content" xml:space="preserve">
@@ -246,11 +246,11 @@
     <comment>组合框提示语</comment>
   </data>
   <data name="contriText1.Text" xml:space="preserve">
-    <value>感谢以下伙伴对我们的帮助与支持。</value>
+    <value>Thank the following contributors for giving us great support.</value>
     <comment>贡献者说明</comment>
   </data>
   <data name="contriText2.Text" xml:space="preserve">
-    <value>正因为各位，我们才能变得更好！</value>
+    <value>Their contributions are making this app better.</value>
     <comment>贡献者说明</comment>
   </data>
   <data name="contriText3.Text" xml:space="preserve">
@@ -258,11 +258,11 @@
     <comment>贡献者说明</comment>
   </data>
   <data name="contriText4.Text" xml:space="preserve">
-    <value>包含建议、意见、批评和设计</value>
+    <value>Including those who gave us useful feedbacks.</value>
     <comment>贡献者说明</comment>
   </data>
   <data name="contriText5.Text" xml:space="preserve">
-    <value>不考虑是否被采纳，排名不分先后，不包含主要开发者</value>
+    <value>Names not listed in order. Not including main developers.</value>
     <comment>贡献者说明</comment>
   </data>
   <data name="Download" xml:space="preserve">
@@ -270,7 +270,7 @@
     <comment>左侧汉堡菜单提示文字</comment>
   </data>
   <data name="downloadHint.Text" xml:space="preserve">
-    <value>（遇到无法下载问题，可尝试禁用后台下载解决）</value>
+    <value>(If not work properly, please disable background download in settings. )</value>
     <comment>下载页面提示语</comment>
   </data>
   <data name="downloadPos.Label" xml:space="preserve">
@@ -322,7 +322,7 @@
     <comment>排程加载</comment>
   </data>
   <data name="loadpolicyinfo.Text" xml:space="preserve">
-    <value>*注意：如果您的网络连接状况（指到Pixiv的连接，下同）较好，使用同步加载能尽快完整显示所有结果；如果您的网络连接状况较差，使用排程加载能避免大面积图片加载失败并缩短单张加载耗时</value>
+    <value>*Info: Multi-Task mode can provide better experience, while Single Task mode requires lower network speed.</value>
     <comment>加载模式说明</comment>
   </data>
   <data name="Logout.Content" xml:space="preserve">
@@ -334,7 +334,7 @@
     <comment>左侧汉堡菜单提示文字</comment>
   </data>
   <data name="MicrosoftBandinfo.Text" xml:space="preserve">
-    <value>通过本设置，您可以发送Pixiv UWP磁贴到与本设备配对的Microsoft Band设备上</value>
+    <value>You can send Pixiv UWP stickers to the Microsoft Band that is paired with this device</value>
     <comment>Microsoft Band提示文字</comment>
   </data>
   <data name="Mywork" xml:space="preserve">
@@ -402,11 +402,11 @@
     <comment>为Microsoft Band添加 Pixiv Tile</comment>
   </data>
   <data name="PopupContent" xml:space="preserve">
-    <value>這是一個內部測試版本：</value>
+    <value>We fixed an issue which may cause not being able to login on some devices. Hope this'll work (we're not 100% percent sure, bucause we can't reproduce the bug, thus can't test our patch).</value>
     <comment>更新内容</comment>
   </data>
   <data name="PopupTitle" xml:space="preserve">
-    <value>버전 V1.3.5β는 내용을 업데이트합니다</value>
+    <value>버전 V1.4.4β는 내용을 업데이트합니다</value>
     <comment>更新内容弹出标题</comment>
   </data>
   <data name="Rank" xml:space="preserve">
@@ -434,7 +434,7 @@
     <comment>作品详情页面：评论</comment>
   </data>
   <data name="WindowsHelloinfo.Text" xml:space="preserve">
-    <value>您可以使用Windows Hello功能来保护您在本软件上的隐私，防止未经授权的访问</value>
+    <value>You can use Windows Hello to define access to the software to protect your privacy.</value>
     <comment>Windows Hello 信息介绍文字</comment>
   </data>
   <data name="WinFeatures.Text" xml:space="preserve">
@@ -446,12 +446,12 @@
     <comment>个性化类别提示文字</comment>
   </data>
   <data name="后台下载说明.Text" xml:space="preserve">
-    <value>您可以根据自己的需要来选择后台下载方式，该设置仅对新启动的下载有效
-*注意：关闭后台下载后软件将不发送完成下载通知</value>
+    <value>You can choose the background download method according to your own needs, this setting is only valid for the new start download
+* Note: After the background download, the software will not send the download notification</value>
     <comment>后台下载说明文字</comment>
   </data>
   <data name="私人关注.Text" xml:space="preserve">
-    <value>私人关注</value>
+    <value>Private attention</value>
     <comment>私人关注飞窗提示文字</comment>
   </data>
   <data name="网络.Text" xml:space="preserve">
@@ -459,7 +459,7 @@
     <comment>网络类别提示文字</comment>
   </data>
   <data name="软件主题说明.Text" xml:space="preserve">
-    <value>*注意：本设置生效需重启应用</value>
+    <value>Reboot after application takes effect.</value>
     <comment>软件主题介绍文字</comment>
   </data>
   <data name="软件主题选择框.Header" xml:space="preserve">

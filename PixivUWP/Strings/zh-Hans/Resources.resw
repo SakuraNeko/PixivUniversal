@@ -342,18 +342,11 @@
     <comment>搜索筛选条件</comment>
   </data>
   <data name="PopupContent" xml:space="preserve">
-    <value>这是一个内部测试版本，主要的改进为：
-【功能】可以在起始面直接搜索图片ID和用户ID了；
-【功能】可以在设置中调整瀑布流设置了；
-【功能】新增了支持用户投票的功能；
-【界面】重写了作品解释页面；
-【翻译】新增了基本的韩语翻译；
-【修正】修正了在流量下下载图片耗费流量的问题；
-【修正】解决了瀑布流设置的诸多异常问题；</value>
+    <value>We fixed an issue which may cause not being able to login on some devices. Hope this'll work (we're not 100% percent sure, bucause we can't reproduce the bug, thus can't test our patch).</value>
     <comment>更新内容</comment>
   </data>
   <data name="PopupTitle" xml:space="preserve">
-    <value>版本 V1.3.7β更新内容</value>
+    <value>版本 V1.4.4β更新内容</value>
     <comment>更新内容弹出标题</comment>
   </data>
   <data name="comboLoadPolicy.Header" xml:space="preserve">

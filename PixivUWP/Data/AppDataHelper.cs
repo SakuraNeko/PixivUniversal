@@ -16,17 +16,132 @@
 //Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Windows.ApplicationModel.Contacts;
 
 namespace PixivUWP.Data
 {
-    //引用自:http://www.cnblogs.com/tonge/p/4760217.html
+    //有关储存容器的部分引用自:http://www.cnblogs.com/tonge/p/4760217.html
     internal static class AppDataHelper
     {
         public const string RefreshTokenKey = "RefreshToken";
         static readonly byte[] HashSalt = new byte[] { 0x03, 0x0a, 0x08, 0x05, 0x0c, 0x0c };
+
+        //获取应用内联系人列表
+        private static async Task<ContactList> getContactListAsync()
+        {
+            var store = await ContactManager.RequestStoreAsync(ContactStoreAccessType.AppContactsReadWrite);
+            if (store == null)
+            {
+#if DEBUG
+                Debug.WriteLine("无法获取ContactStore");
+                if (Debugger.IsAttached) Debugger.Break();
+#endif
+                return null;
+            }
+            var contactLists = await store.FindContactListsAsync();
+            if (contactLists.Count == 0)
+            {
+#if DEBUG
+                Debug.WriteLine("ContactLists无数据，创建新List");
+#endif
+                return await store.CreateContactListAsync("PinnedContacts");
+            }
+            else return contactLists[0];
+        }
+
+        //获取应用内联系人注释列表
+        private static async Task<ContactAnnotationList> getContactAnnotationListAsync()
+        {
+            var annotationStore = await ContactManager.RequestAnnotationStoreAsync(ContactAnnotationStoreAccessType.AppAnnotationsReadWrite);
+            if (annotationStore == null)
+            {
+#if DEBUG
+                Debug.WriteLine("无法获取ContactAnnotationStore");
+                if (Debugger.IsAttached) Debugger.Break();
+#endif
+                return null;
+            }
+            var annotationLists = await annotationStore.FindAnnotationListsAsync();
+            if (annotationLists.Count == 0)
+            {
+#if DEBUG
+                Debug.WriteLine("ContactAnnotationLists无数据，创建新List");
+#endif
+                return await annotationStore.CreateAnnotationListAsync();
+            }
+            else return annotationLists[0];
+        }
+
+        //检查联系人是否在列表里
+        public static async Task<bool> checkContactAsync(Contact contact)
+        {
+            var contactList = await getContactListAsync();
+            try
+            {
+                if ((await contactList.GetContactFromRemoteIdAsync(contact.RemoteId)) == null)
+                    return false;
+                else
+                    return true;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
+        //添加联系人进列表
+        public static async Task<bool> addContactAsync(Contact contact)
+        {
+            if (await checkContactAsync(contact)) return false;
+            var contactList = await getContactListAsync();
+            await contactList.SaveContactAsync(contact);
+            await contactList.SaveAsync();
+            ContactAnnotation contactAnnotation = new ContactAnnotation();
+            //contactAnnotation.ContactId = contact.Id;
+            contactAnnotation.ContactListId = contact.ContactListId;
+            contactAnnotation.RemoteId = contact.RemoteId;
+            contactAnnotation.ProviderProperties.Add("ContactPanelAppID", "18416PixeezPlusProject.PixivUWP_fsr1r9g7nfjfw!App");
+            contactAnnotation.SupportedOperations = ContactAnnotationOperations.ContactProfile;
+            var contactAnnotationList = await getContactAnnotationListAsync();
+            var b = await contactAnnotationList.TrySaveAnnotationAsync(contactAnnotation);
+            return true;
+        }
+
+        //从表中移除联系人
+        public static async Task<bool> deleteContactAsync(Contact contact)
+        {
+            if (!(await checkContactAsync(contact))) return false;
+            var contactList = await getContactListAsync();
+            await contactList.DeleteContactAsync(await contactList.GetContactFromRemoteIdAsync(contact.RemoteId));
+            var contactAnnotationList = await getContactAnnotationListAsync();
+            await contactAnnotationList.DeleteAnnotationAsync(await contactAnnotationList.GetAnnotationAsync(contact.Id));
+            return true;
+        }
+
+        //固定联系人
+        public static async void PinContact(Contact contact)
+        {
+            //前面应放置API版本检查代码，仅能实装于16299
+            if (await checkContactAsync(contact)) return;
+            await addContactAsync(contact);
+            PinnedContactManager contactManager = PinnedContactManager.GetDefault();
+            await contactManager.RequestPinContactAsync(contact, PinnedContactSurface.Taskbar);
+        }
+
+        public static async void UnpinContact(Contact contact)
+        {
+            //前面应放置API版本检查代码，仅能实装于16299
+            if (!(await checkContactAsync(contact))) return;
+            PinnedContactManager contactManager = PinnedContactManager.GetDefault();
+            var contactList = await getContactListAsync();
+            await contactManager.RequestUnpinContactAsync(await contactList.GetContactFromRemoteIdAsync(contact.RemoteId), PinnedContactSurface.Taskbar);
+            await deleteContactAsync(contact);
+        }
+
         public static string GetDeviceId()
         {
             var easId = new Windows.Security.ExchangeActiveSyncProvisioning.EasClientDeviceInformation().Id;

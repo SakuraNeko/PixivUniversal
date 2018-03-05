@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
-    <string name="ApplicationName">Pixiv</string>
-  <string name="Title">Pixiv登录</string>
-  <string name="UserName">用户名</string>
-  <string name="Password">密码</string>
-  <string name="Login">登录</string>
-</resources>

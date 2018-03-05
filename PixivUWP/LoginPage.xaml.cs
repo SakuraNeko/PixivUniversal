@@ -200,5 +200,15 @@ namespace PixivUWP
             if (txt_UserName.Text != "")
                 txt_Password.Focus(FocusState.Programmatic);
         }
+
+        private void updatenetset_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void resetnetset_Click(object sander, RoutedEventArgs e)
+        {
+
+        }
     }
 }

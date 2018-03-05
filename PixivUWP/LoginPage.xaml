@@ -60,5 +60,26 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.-
                 <Button Grid.Row="4" Margin="20,0" HorizontalAlignment="Stretch" Click="RegButton_Click" BorderThickness="1" x:Uid="Signup" Background="#25C6FF" Foreground="White"/>
             </Grid>
         </Grid>
+        <Button x:Name="NetSet" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="10" Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" Padding="5" IsEnabled="False">
+            <SymbolIcon Symbol="Setting"/>
+            <Button.Flyout>
+                <Flyout >
+                    <StackPanel Width="280">
+                        <TextBlock x:Uid="网络调试" FontSize="18" Text="网络调试" Margin="5,10,-1,5" FontWeight="Bold"/>
+                        <ToggleSwitch x:Name="chk_WindowsHello"  IsEnabled="False" Margin="5,0,-1,0"/>
+                        <TextBlock Margin="5,0,-1,5" x:Uid="网络调试说明" FontSize="12" TextWrapping="WrapWholeWords" Foreground="Gray" Width="280" HorizontalAlignment="Left" Text="网络调试提示文字"/>
+                        <StackPanel Margin="5,0">
+                            <TextBlock Text="oauth.secure.pixiv.net" HorizontalAlignment="Left"/>
+                            <TextBox x:Name="a" Width="220" HorizontalAlignment="Left" IsEnabled="False"/>
+                            <TextBlock Text="app-api.pixiv.net" HorizontalAlignment="Left"/>
+                            <TextBox x:Name="b" Width="220" HorizontalAlignment="Left" IsEnabled="False"/>
+                            <TextBlock Text="public-api.secure.pixiv.net" HorizontalAlignment="Left"/>
+                            <TextBox x:Name="c" Width="220" HorizontalAlignment="Left" IsEnabled="False"/>
+                        </StackPanel>
+                    </StackPanel>
+                </Flyout>
+            </Button.Flyout>
+        </Button>
     </Grid>
+    
 </Page>
