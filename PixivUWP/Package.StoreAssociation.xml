@@ -363,6 +363,8 @@
       <ReservedName>Pixiv UWP</ReservedName>
     </ReservedNames>
   </ProductReservedInfo>
-  <AccountPackageIdentityNames />
+  <AccountPackageIdentityNames>
+    <MainPackageIdentityName>18416PixeezPlusProject.DeviantArtUWP</MainPackageIdentityName>
+  </AccountPackageIdentityNames>
   <PackageInfoList LandingUrl="https://developer.microsoft.com/dashboard/Application?appId=9PM8K64J71PL" />
 </StoreAssociation>
