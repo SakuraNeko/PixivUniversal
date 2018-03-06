@@ -32,6 +32,9 @@ using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 using Microsoft.HockeyApp;
 using System.Threading.Tasks;
+using Windows.ApplicationModel.Core;
+using Windows.UI.Core;
+using Windows.UI.ViewManagement;
 
 namespace PixivUWP
 {
@@ -80,6 +83,23 @@ namespace PixivUWP
             }
         }
 
+        override protected void OnActivated(IActivatedEventArgs e)
+        {
+            if (e.Kind == ActivationKind.ContactPanel)
+            {
+                // Create a Frame to act as the navigation context and navigate to the first page
+                var rootFrame = new Frame();
+
+                // Place the frame in the current Window
+                Window.Current.Content = rootFrame;
+
+                // Navigate to the page that shows the Contact UI.
+                rootFrame.Navigate(typeof(ContactPanelPage), e);
+
+                // Ensure the current window is active
+                Window.Current.Activate();
+            }
+        }
 
         /// <summary>
         /// 在应用程序由最终用户正常启动时进行调用。
@@ -96,7 +116,7 @@ namespace PixivUWP
 #endif
             if (e.Arguments == "") Data.TmpData.jumpList = "null";
             else Data.TmpData.jumpList = e.Arguments;
-            if(mainview==null)
+            if (mainview == null)
             {
                 mainview = Windows.UI.ViewManagement.ApplicationView.GetForCurrentView();
                 mainview.Consolidated += CurrentView_Consolidated;
@@ -135,7 +155,6 @@ namespace PixivUWP
                 Window.Current.Activate();
             }
         }
-
         object args;
 
         //public (object args,Type page) getpagetonav(object args)

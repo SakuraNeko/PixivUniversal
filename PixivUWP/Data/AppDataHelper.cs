@@ -107,7 +107,7 @@ namespace PixivUWP.Data
             //contactAnnotation.ContactListId = contact.ContactListId;
             contactAnnotation.RemoteId = contact.RemoteId;
             contactAnnotation.ProviderProperties.Add("ContactPanelAppID", "18416PixeezPlusProject.PixivUWP_fsr1r9g7nfjfw!App");
-            contactAnnotation.SupportedOperations = ContactAnnotationOperations.SocialFeeds;
+            contactAnnotation.SupportedOperations = ContactAnnotationOperations.ContactProfile;
             var contactAnnotationList = await getContactAnnotationListAsync();
             var b = await contactAnnotationList.TrySaveAnnotationAsync(contactAnnotation);
             return true;

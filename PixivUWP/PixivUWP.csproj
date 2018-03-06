@@ -117,6 +117,9 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="ContactPanelPage.xaml.cs">
+      <DependentUpon>ContactPanelPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\ContextFlyoutSetter.cs" />
     <Compile Include="Controls\MyToast.xaml.cs" />
     <Compile Include="Controls\ScalableGrid.cs" />
@@ -240,6 +243,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Page Include="ContactPanelPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Controls\MyToast.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
