@@ -94,7 +94,7 @@ namespace PixivUWP
                 Window.Current.Content = rootFrame;
 
                 // Navigate to the page that shows the Contact UI.
-                rootFrame.Navigate(typeof(ContactPanelPage), e);
+                rootFrame.Navigate(typeof(ContactPanelPage), (ContactPanelActivatedEventArgs)e);
 
                 // Ensure the current window is active
                 Window.Current.Activate();
