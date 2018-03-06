@@ -17,10 +17,12 @@
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Windows.ApplicationModel.Contacts;
+using Windows.Storage.Streams;
 
 namespace PixivUWP.Data
 {
@@ -101,11 +103,11 @@ namespace PixivUWP.Data
             await contactList.SaveContactAsync(contact);
             await contactList.SaveAsync();
             ContactAnnotation contactAnnotation = new ContactAnnotation();
-            //contactAnnotation.ContactId = contact.Id;
-            contactAnnotation.ContactListId = contact.ContactListId;
+            contactAnnotation.ContactId = contact.Id;
+            //contactAnnotation.ContactListId = contact.ContactListId;
             contactAnnotation.RemoteId = contact.RemoteId;
             contactAnnotation.ProviderProperties.Add("ContactPanelAppID", "18416PixeezPlusProject.PixivUWP_fsr1r9g7nfjfw!App");
-            contactAnnotation.SupportedOperations = ContactAnnotationOperations.ContactProfile;
+            contactAnnotation.SupportedOperations = ContactAnnotationOperations.SocialFeeds;
             var contactAnnotationList = await getContactAnnotationListAsync();
             var b = await contactAnnotationList.TrySaveAnnotationAsync(contactAnnotation);
             return true;
@@ -116,14 +118,16 @@ namespace PixivUWP.Data
         {
             if (!(await checkContactAsync(contact))) return false;
             var contactList = await getContactListAsync();
-            await contactList.DeleteContactAsync(await contactList.GetContactFromRemoteIdAsync(contact.RemoteId));
+            var realcontact = await contactList.GetContactFromRemoteIdAsync(contact.RemoteId);
+            await contactList.DeleteContactAsync(realcontact);
+            await contactList.SaveAsync();
             var contactAnnotationList = await getContactAnnotationListAsync();
-            await contactAnnotationList.DeleteAnnotationAsync(await contactAnnotationList.GetAnnotationAsync(contact.Id));
+            //await contactAnnotationList.DeleteAnnotationAsync(await contactAnnotationList.GetAnnotationAsync(realcontact.Id));
             return true;
         }
 
         //固定联系人
-        public static async void PinContact(Contact contact)
+        public static async Task PinContact(Contact contact)
         {
             //前面应放置API版本检查代码，仅能实装于16299
             if (await checkContactAsync(contact)) return;
@@ -132,7 +136,7 @@ namespace PixivUWP.Data
             await contactManager.RequestPinContactAsync(contact, PinnedContactSurface.Taskbar);
         }
 
-        public static async void UnpinContact(Contact contact)
+        public static async Task UnpinContact(Contact contact)
         {
             //前面应放置API版本检查代码，仅能实装于16299
             if (!(await checkContactAsync(contact))) return;

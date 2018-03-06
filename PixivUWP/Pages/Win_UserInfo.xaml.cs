@@ -27,6 +27,7 @@ using System.Threading.Tasks;
 using Windows.ApplicationModel.Contacts;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Windows.Storage;
 using Windows.Storage.Streams;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
@@ -256,19 +257,29 @@ namespace PixivUWP.Pages
                 //    pix_user = ().Single();
                 //    imgurl = pix_user.ProfileImageUrls.Px170x170;
                 //}
-                using (var res = await PixivUWP.Data.TmpData.CurrentAuth.Tokens.SendRequestToGetImageAsync(Pixeez.MethodType.GET, newuserinfo.user.profile_image_urls.Medium))
+                using (var res = await TmpData.CurrentAuth.Tokens.SendRequestToGetImageAsync(Pixeez.MethodType.GET, newuserinfo.user.profile_image_urls.Medium))
                 {
-                    var bitmap = new Windows.UI.Xaml.Media.Imaging.BitmapImage();
-                    await bitmap.SetSourceAsync((await res.GetResponseStreamAsync()).AsRandomAccessStream());
-                    userpro.ImageSource = bitmap;
-                    contact.Id = "PIXIV!" + pix_user.Id.ToString();
+                    var netStream = await res.GetResponseStreamAsync();
+                    StorageFolder applicationdatafolder = ApplicationData.Current.TemporaryFolder;
+                    var file = await applicationdatafolder.CreateFileAsync("tmpavatar.jpg", CreationCollisionOption.ReplaceExisting);
+                    using (var filestream = await file.OpenStreamForWriteAsync())
+                    {
+                        await netStream.CopyToAsync(filestream);
+                    }
+                    using (var filestream = await file.OpenStreamForReadAsync())
+                    {
+                        var bitmap = new Windows.UI.Xaml.Media.Imaging.BitmapImage();
+                        await bitmap.SetSourceAsync(filestream.AsRandomAccessStream());
+                        userpro.ImageSource = bitmap;
+                    }
+                    //contact.Id = "PIXIV!" + pix_user.Id.ToString();
                     contact.RemoteId = "PIXIV!" + pix_user.Id.ToString();
                     contact.Name = pix_user.Name;
-                    contact.SourceDisplayPicture = RandomAccessStreamReference.CreateFromStream((await res.GetResponseStreamAsync()).AsRandomAccessStream());
-                    if (pix_user.Email != null)
+                    contact.SourceDisplayPicture = RandomAccessStreamReference.CreateFromFile(file);
+                    if (newuserinfo.user.Email != null)
                     {
                         ContactEmail contactEmail = new ContactEmail();
-                        contactEmail.Address = pix_user.Email;
+                        contactEmail.Address = newuserinfo.user.Email;
                         contact.Emails.Add(contactEmail);
                     }
                     btn_Pin.IsChecked = await Data.AppDataHelper.checkContactAsync(contact);
@@ -362,10 +373,31 @@ namespace PixivUWP.Pages
 
         private bool pinned = false;
         Contact contact = new Contact();
-        private void btn_Pin_Click(object sender, RoutedEventArgs e)
+        private async void btn_Pin_Click(object sender, RoutedEventArgs e)
         {
-            if (!pinned) Data.AppDataHelper.PinContact(contact);
-            else Data.AppDataHelper.UnpinContact(contact);
+            if (!pinned)
+            {
+                await Data.AppDataHelper.PinContact(contact);
+                btn_Pin.IsChecked = await Data.AppDataHelper.checkContactAsync(contact);
+                pinned = btn_Pin.IsChecked.Value;
+            }
+            else
+            {
+                await Data.AppDataHelper.UnpinContact(contact);
+                btn_Pin.IsChecked = await Data.AppDataHelper.checkContactAsync(contact);
+                pinned = btn_Pin.IsChecked.Value;
+                Contact newcontact = new Contact();
+                newcontact.RemoteId = contact.RemoteId;
+                newcontact.Name = contact.Name;
+                newcontact.SourceDisplayPicture = contact.SourceDisplayPicture;
+                if (pix_user.Email != null)
+                {
+                    ContactEmail contactEmail = new ContactEmail();
+                    contactEmail.Address = pix_user.Email;
+                    newcontact.Emails.Add(contactEmail);
+                }
+                contact = newcontact;
+            }
         }
     }
 }
