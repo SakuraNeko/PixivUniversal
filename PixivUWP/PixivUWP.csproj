@@ -107,7 +107,6 @@
     <!-- A reference to the entire .Net Framework and Windows SDK are automatically included -->
     <None Include="PixivUWP_StoreKey.pfx" />
     <None Include="ScalableGridDiagram.cd" />
-    <None Include="PixivUWP_TemporaryKey.pfx" />
     <PRIResource Include="Strings\ko\Resources.resw" />
     <PRIResource Include="Strings\en-US\Resources.resw" />
     <PRIResource Include="Strings\ja\Resources.resw" />

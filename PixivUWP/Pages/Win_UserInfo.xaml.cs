@@ -261,10 +261,10 @@ namespace PixivUWP.Pages
                     var bitmap = new Windows.UI.Xaml.Media.Imaging.BitmapImage();
                     await bitmap.SetSourceAsync((await res.GetResponseStreamAsync()).AsRandomAccessStream());
                     userpro.ImageSource = bitmap;
-                    //contact.Id = "PIXIV!" + pix_user.Id.ToString();
+                    contact.Id = "PIXIV!" + pix_user.Id.ToString();
                     contact.RemoteId = "PIXIV!" + pix_user.Id.ToString();
                     contact.Name = pix_user.Name;
-                    //contact.SourceDisplayPicture = RandomAccessStreamReference.CreateFromStream((await res.GetResponseStreamAsync()).AsRandomAccessStream());
+                    contact.SourceDisplayPicture = RandomAccessStreamReference.CreateFromStream((await res.GetResponseStreamAsync()).AsRandomAccessStream());
                     if (pix_user.Email != null)
                     {
                         ContactEmail contactEmail = new ContactEmail();
@@ -273,7 +273,7 @@ namespace PixivUWP.Pages
                     }
                     btn_Pin.IsChecked = await Data.AppDataHelper.checkContactAsync(contact);
                     pinned = btn_Pin.IsChecked.Value;
-                    //btn_Pin.IsEnabled = true;
+                    btn_Pin.IsEnabled = true;
                 }
                 if (newuserinfo.profile != null)
                 {
