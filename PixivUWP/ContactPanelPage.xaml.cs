@@ -13,6 +13,7 @@ using Windows.ApplicationModel.Activation;
 using Windows.ApplicationModel.Contacts;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Windows.UI.Core;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
@@ -84,7 +85,6 @@ namespace PixivUWP
                     AppDataHelper.SetValue(AppDataHelper.RefreshTokenKey, Newtonsoft.Json.JsonConvert.SerializeObject(token));
                     logininfo.Visibility = Visibility.Collapsed;
                     viewer.Visibility = Visibility.Visible;
-                    TmpData.StopLoading();
                     WorksListView.ItemsSource = list;
                     var result = firstLoadAsync();
                 }
@@ -144,6 +144,101 @@ namespace PixivUWP
             _originHeight = viewer.VerticalOffset;
             if (viewer.VerticalOffset <= viewer.ScrollableHeight - 500) return;
             var result = loadAsync();
+        }
+
+        static List<FrameworkElement> loaded = new List<FrameworkElement>();
+        static List<Task> loadingPics = new List<Task>();
+        static Queue<FrameworkElement> loadQueue = new Queue<FrameworkElement>();
+
+        private void img_DataContextChanged(FrameworkElement sender, DataContextChangedEventArgs args)
+        {
+            if (loaded.Contains(sender)) return;
+            var img = sender as Image;
+            img.Source = new Windows.UI.Xaml.Media.Imaging.BitmapImage(new Uri("ms-appx:///Assets/BlankHolder.png"));
+            if (((int?)Data.AppDataHelper.GetValue("LoadPolicy")) == 0)
+            {
+                var tmptask = LoadPictureAsync(sender);
+                loadingPics.Add(tmptask);
+                var tmpwaiter = tmptask.GetAwaiter();
+                tmpwaiter.OnCompleted(() => loadingPics.Remove(tmptask));
+            }
+            else
+            {
+                loadQueue.Enqueue(sender);
+                var tmptask = QueuedLoad();
+                loadingPics.Add(tmptask);
+                var tmpwaiter = tmptask.GetAwaiter();
+                tmpwaiter.OnCompleted(() => loadingPics.Remove(tmptask));
+            }
+        }
+
+        static bool isQueuedLoading = false;
+
+        private async static Task QueuedLoad()
+        {
+            if (isQueuedLoading) return;
+            isQueuedLoading = true;
+            while (loadQueue.Count > 0)
+            {
+                var tmpSender = loadQueue.Dequeue();
+                await LoadPictureAsync(tmpSender);
+            }
+            isQueuedLoading = false;
+        }
+
+        public static string geturlbypolicy(ImageUrls urls)
+        {
+            switch (Data.AppDataHelper.GetValue("PreviewImageSize"))
+            {
+                default:
+                case 0:
+                    return urls.Medium;
+                case 1:
+                    return urls.SquareMedium ?? urls.Small;
+            }
+        }
+
+        public static async Task LoadPictureAsync(FrameworkElement sender)
+        {
+            if (loaded.Contains(sender)) return;
+            try
+            {
+                CoreDispatcher dispatcher = CoreWindow.GetForCurrentThread().Dispatcher;
+                await dispatcher.RunAsync(CoreDispatcherPriority.Low,
+                     () =>
+                     { }
+                     );
+                if (sender.Parent is Panel pl)
+                {
+                    if (pl.FindName("pro") is TextBlock ring)
+                    {
+                        ring.Visibility = Visibility.Visible;
+                        try
+                        {
+                            var img = sender as Image;
+                            if (img.DataContext != null)
+                            {
+                                var work = (img.DataContext as Work);
+                                using (var stream = await Data.TmpData.CurrentAuth.Tokens.SendRequestToGetImageAsync(Pixeez.MethodType.GET, geturlbypolicy(work.ImageUrls)))
+                                {
+                                    var bitmap = new Windows.UI.Xaml.Media.Imaging.BitmapImage();
+                                    await bitmap.SetSourceAsync((await stream.GetResponseStreamAsync()).AsRandomAccessStream());
+                                    img.Source = bitmap;
+                                    loaded.Add(sender);
+                                }
+                            }
+                        }
+                        finally
+                        {
+                            ring.Visibility = Visibility.Collapsed;
+                        }
+                    }
+                }
+            }
+            catch
+            {
+
+            }
         }
     }
 }

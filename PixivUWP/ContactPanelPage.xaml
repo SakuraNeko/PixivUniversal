@@ -7,7 +7,26 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:controls="using:PixivUWP.Controls"
     mc:Ignorable="d">
-
+    <Page.Resources>
+        <DataTemplate x:Key="contactpanelworkitem">
+            <Grid Height="Auto" Margin="-10 2 -10 2">
+                <Image Name="img" MinHeight="125" Stretch="UniformToFill" Source="Assets/BlankHolder.jpg" DataContextChanged="img_DataContextChanged"/>
+                <TextBlock x:Name="pro" Margin="0 0 0 0" VerticalAlignment="Center" HorizontalAlignment="Center" Text="Loading..."/>
+                <Grid Grid.Row="1" Background="#99CCCCCC" RequestedTheme="Light" VerticalAlignment="Bottom" Height="40">
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+                    <TextBlock Grid.Row="0" FontSize="12" FontWeight="Bold" Text="{Binding Title}" Margin="5 5 5 0" TextTrimming="WordEllipsis" HorizontalAlignment="Left"/>
+                    <TextBlock FontSize="10" Grid.Row="1" Text="{Binding User.Name}" Margin="5 0 0 0" Width="100" TextTrimming="WordEllipsis" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+                    <StackPanel Margin="0 0 0 0" Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Right">
+                        <TextBlock FontFamily="{ThemeResource SymbolThemeFontFamily}" Text="{Binding is_bookmarked,Converter={StaticResource IsLikedCvt}}" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="10"/>
+                        <TextBlock FontSize="10" Text="{Binding total_bookmarks}" HorizontalAlignment="Center" Width="32" VerticalAlignment="Center"/>
+                    </StackPanel>
+                </Grid>
+            </Grid>
+        </DataTemplate>
+    </Page.Resources>
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
         <TextBlock x:Name="info" VerticalAlignment="Center" HorizontalAlignment="Center" HorizontalTextAlignment="Center" Visibility="Collapsed">Something is wrong</TextBlock>
         <TextBlock x:Name="logininfo" VerticalAlignment="Center" HorizontalAlignment="Center" HorizontalTextAlignment="Center" Visibility="Visible">Logging in...</TextBlock>
@@ -15,7 +34,7 @@
             <ListView
                     x:Name="WorksListView"
                     IsItemClickEnabled="True"
-                    ItemTemplate="{StaticResource workitem}"
+                    ItemTemplate="{StaticResource contactpanelworkitem}"
                     ScrollViewer.VerticalScrollMode="Disabled"
                     ScrollViewer.HorizontalScrollMode="Disabled"
                     ScrollViewer.HorizontalScrollBarVisibility="Disabled"
