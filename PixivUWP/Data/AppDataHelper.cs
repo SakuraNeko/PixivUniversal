@@ -50,7 +50,7 @@ namespace PixivUWP.Data
 #if DEBUG
                 Debug.WriteLine("ContactLists无数据，创建新List");
 #endif
-                return await store.CreateContactListAsync("PinnedContacts");
+                return await store.CreateContactListAsync("PixivUWP");
             }
             else return contactLists[0];
         }
