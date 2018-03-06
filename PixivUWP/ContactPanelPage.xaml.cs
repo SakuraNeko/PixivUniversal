@@ -146,9 +146,9 @@ namespace PixivUWP
             var result = loadAsync();
         }
 
-        static List<FrameworkElement> loaded = new List<FrameworkElement>();
-        static List<Task> loadingPics = new List<Task>();
-        static Queue<FrameworkElement> loadQueue = new Queue<FrameworkElement>();
+        List<FrameworkElement> loaded = new List<FrameworkElement>();
+        List<Task> loadingPics = new List<Task>();
+        Queue<FrameworkElement> loadQueue = new Queue<FrameworkElement>();
 
         private void img_DataContextChanged(FrameworkElement sender, DataContextChangedEventArgs args)
         {
@@ -172,9 +172,9 @@ namespace PixivUWP
             }
         }
 
-        static bool isQueuedLoading = false;
+        bool isQueuedLoading = false;
 
-        private async static Task QueuedLoad()
+        private async Task QueuedLoad()
         {
             if (isQueuedLoading) return;
             isQueuedLoading = true;
@@ -198,7 +198,7 @@ namespace PixivUWP
             }
         }
 
-        public static async Task LoadPictureAsync(FrameworkElement sender)
+        public async Task LoadPictureAsync(FrameworkElement sender)
         {
             if (loaded.Contains(sender)) return;
             try
