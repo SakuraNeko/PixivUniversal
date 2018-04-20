@@ -74,7 +74,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.-
                     <StackPanel.Background>
                         <SolidColorBrush Color="#FFE6E3E3"/>
                     </StackPanel.Background>
-                    <WebView x:Name="des" Margin="5" Height="Auto" DefaultBackgroundColor="#FFE6E3E3"/>
+                    <WebView x:Name="des" Margin="5" Height="Auto" DefaultBackgroundColor="#FFE6E3E3" MaxHeight="96"/>
                 </StackPanel>
                 <StackPanel Grid.Row="3" Margin="15,5,10,5" HorizontalAlignment="Left">
                     <Grid>
