@@ -97,9 +97,12 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.-
                     <TextBlock  x:Uid="Windows Hello" Margin="5,10,-1,5" Width="280" HorizontalAlignment="Left" Text="Windows Hello"/>
                     <ToggleSwitch x:Name="chk_WindowsHello" IsEnabled="False" Margin="5,0,-1,0"/>
                     <TextBlock x:Uid="WindowsHelloinfo" Margin="5,0,-1,5" FontSize="12" TextWrapping="WrapWholeWords" Foreground="Gray" Width="280" HorizontalAlignment="Left" Text="Windows Hello 提示文字"/>
-                    <TextBlock x:Uid="MicrosoftBand"  Margin="5,10,-1,5" HorizontalAlignment="Left" VerticalAlignment="Center" Width="280" Text="Microsoft Band"/>
+                    <TextBlock x:Uid="MicrosoftBand" Margin="5,10,-1,5" HorizontalAlignment="Left" VerticalAlignment="Center" Width="280" Text="Microsoft Band"/>
                     <Button x:Name="band_Connect" x:Uid="PlusPixivTile" Content="+ Pixiv Tile" Margin="5,0,-1,5" Width="100" Click="band_Connect_Click" IsEnabled="False"/>
                     <TextBlock x:Uid="MicrosoftBandinfo" Margin="5,0,-1,10" FontSize="12" TextWrapping="WrapWholeWords" Foreground="Gray" Width="280" HorizontalAlignment="Left" Text="Microsoft Band 提示文字"/>
+                    <TextBlock x:Uid="Background"  Margin="5,10,-1,5" HorizontalAlignment="Left" VerticalAlignment="Center" Width="280" Text="Background"/>
+                    <TextBlock Margin="5,0,-1,5"><Hyperlink NavigateUri="ms-settings:privacy-backgroundapps"><Run x:Uid="BackgroundHyperlink" Text="Background Settings"/></Hyperlink></TextBlock>
+                    <TextBlock x:Uid="Backgroundinfo" Margin="5,0,-1,10" FontSize="12" TextWrapping="WrapWholeWords" Foreground="Gray" Width="280" HorizontalAlignment="Left" Text="前往系统后台设置提示文字"/>
                 </StackPanel>
             </ScrollViewer>
         </PivotItem>
