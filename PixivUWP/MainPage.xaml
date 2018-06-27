@@ -302,7 +302,19 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.-
                             </StackPanel>
                         </Grid>
                     </Button>
-                    <AutoSuggestBox x:Name="Searchbox" QuerySubmitted="Searchbox_QuerySubmitted" Grid.Row="2" QueryIcon="Find" x:Uid="searchBox" VerticalAlignment="Center" Style="{StaticResource AutoSuggestWithoutBorder}" Visibility="Collapsed" Opacity="0" Margin="5 0"/>
+                    
+                    <AutoSuggestBox 
+                        x:Name="Searchbox" 
+                        QuerySubmitted="Searchbox_QuerySubmitted" 
+                        Grid.Row="2" 
+                        QueryIcon="Find" 
+                        x:Uid="searchBox" 
+                        VerticalAlignment="Center" 
+                        Style="{StaticResource AutoSuggestWithoutBorder}" 
+                        Visibility="Collapsed" 
+                        Opacity="0" 
+                        Margin="5 0"/>
+                    
                     <Button x:Name="SearchBtn" Grid.Row="2" Style="{StaticResource DimButtonStyle}" Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" Height="48" Width="48" Click="SearchBtn_Click">
                         <TextBlock FontSize="16" FontFamily="Segoe MDL2 Assets" Text="" VerticalAlignment="Center" HorizontalAlignment="Center"/>
                     </Button>
