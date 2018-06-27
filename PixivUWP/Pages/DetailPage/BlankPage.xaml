@@ -38,14 +38,12 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.-
                 <StackPanel Orientation="Vertical" Grid.Column="1">
                     <AutoSuggestBox 
                         x:Name="gotoBox" 
-                        x:Uid="gotoBox"
+                        x:Uid="gotoBox" 
                         HorizontalAlignment="Stretch" 
-                        PlaceholderText="Enter author name or PixivID..." 
-                        BorderThickness="0"
-                        QueryIcon="Find"
+                        PlaceholderText="输入Pixiv作品或作者ID..." 
                         Style="{StaticResource AutoSuggestWithoutBorder}" 
-                        IsEnabled="False"
-                        />
+                        QueryIcon="Find" 
+                        IsEnabled="False"/>
                 </StackPanel>
             </Grid>
         </StackPanel>
