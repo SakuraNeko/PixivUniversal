@@ -76,33 +76,33 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.-
                                     </VisualStateGroup>
                                 </VisualStateManager.VisualStateGroups>
                                 <TextBox x:Name="TextBox"
-                Style="{TemplateBinding TextBoxStyle}"
-                PlaceholderText="{TemplateBinding PlaceholderText}"
-                Header="{TemplateBinding Header}"
-                Width="{TemplateBinding Width}"
-                BorderThickness="1"
-                ScrollViewer.BringIntoViewOnFocusChange="False"
-                Canvas.ZIndex="0"
-                Margin="0"
-                DesiredCandidateWindowAlignment="BottomEdge"/>
+                                Style="{TemplateBinding TextBoxStyle}"
+                                PlaceholderText="{TemplateBinding PlaceholderText}"
+                                Header="{TemplateBinding Header}"
+                                Width="{TemplateBinding Width}"
+                                BorderThickness="1"
+                                ScrollViewer.BringIntoViewOnFocusChange="False"
+                                Canvas.ZIndex="0"
+                                Margin="0"
+                                DesiredCandidateWindowAlignment="BottomEdge"/>
                                 <Popup x:Name="SuggestionsPopup">
                                     <Border x:Name="SuggestionsContainer" BorderThickness="0">
                                         <Border.RenderTransform>
                                             <TranslateTransform x:Name="UpwardTransform"/>
                                         </Border.RenderTransform>
                                         <ListView
-            x:Name="SuggestionsList"
-            Background="{ThemeResource SystemControlBackgroundChromeMediumLowBrush}"
-            BorderThickness="0"
-            BorderBrush="{ThemeResource SystemControlForegroundChromeHighBrush}"
-            DisplayMemberPath="{TemplateBinding DisplayMemberPath}"
-            IsItemClickEnabled="True"
-            ItemTemplate="{TemplateBinding ItemTemplate}"
-            ItemTemplateSelector="{TemplateBinding ItemTemplateSelector}"
-            ItemContainerStyle="{TemplateBinding ItemContainerStyle}"
-            MaxHeight="{ThemeResource AutoSuggestListMaxHeight}"
-            Margin="{ThemeResource AutoSuggestListMargin}"
-            Padding="{ThemeResource AutoSuggestListPadding}">
+                                            x:Name="SuggestionsList"
+                                            Background="{ThemeResource SystemControlBackgroundChromeMediumLowBrush}"
+                                            BorderThickness="0"
+                                            BorderBrush="{ThemeResource SystemControlForegroundChromeHighBrush}"
+                                            DisplayMemberPath="{TemplateBinding DisplayMemberPath}"
+                                            IsItemClickEnabled="True"
+                                            ItemTemplate="{TemplateBinding ItemTemplate}"
+                                            ItemTemplateSelector="{TemplateBinding ItemTemplateSelector}"
+                                            ItemContainerStyle="{TemplateBinding ItemContainerStyle}"
+                                            MaxHeight="{ThemeResource AutoSuggestListMaxHeight}"
+                                            Margin="{ThemeResource AutoSuggestListMargin}"
+                                            Padding="{ThemeResource AutoSuggestListPadding}">
                                             <ListView.ItemContainerTransitions>
                                                 <TransitionCollection />
                                             </ListView.ItemContainerTransitions>

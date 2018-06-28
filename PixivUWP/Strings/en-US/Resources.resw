@@ -514,6 +514,7 @@
     <value>Fly Reader</value>
   </data>
   <data name="gotoBox.PlaceholderText" xml:space="preserve">
-    <value />
+    <value>Enter author name or PixivID</value>
+    <comment>空页搜索框提示文字</comment>
   </data>
 </root>
