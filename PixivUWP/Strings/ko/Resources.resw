@@ -406,7 +406,7 @@
     <comment>更新内容</comment>
   </data>
   <data name="PopupTitle" xml:space="preserve">
-    <value>버전 V1.4.4β는 내용을 업데이트합니다</value>
+    <value>버전 V1.4.5β는 내용을 업데이트합니다</value>
     <comment>更新内容弹出标题</comment>
   </data>
   <data name="Rank" xml:space="preserve">
