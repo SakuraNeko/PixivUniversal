@@ -402,7 +402,7 @@
     <comment>为Microsoft Band添加 Pixiv Tile</comment>
   </data>
   <data name="PopupContent" xml:space="preserve">
-    <value>We fixed an issue which may cause not being able to login on some devices. Hope this'll work (we're not 100% percent sure, bucause we can't reproduce the bug, thus can't test our patch).</value>
+    <value>We fixed an issue which may cause not being able to login on some devices. Special thanks to Pshpdesu from GitHub.</value>
     <comment>更新内容</comment>
   </data>
   <data name="PopupTitle" xml:space="preserve">
