@@ -507,4 +507,7 @@
     <value>Reset</value>
     <comment>重设</comment>
   </data>
+  <data name="gotoBox.PlaceholderText" xml:space="preserve">
+    <value />
+  </data>
 </root>
