@@ -343,11 +343,11 @@
     <comment>搜索筛选条件</comment>
   </data>
   <data name="PopupContent" xml:space="preserve">
-    <value>We fixed an issue which may cause not being able to login on some devices. Hope this'll work (we're not 100% percent sure, bucause we can't reproduce the bug, thus can't test our patch).</value>
+    <value>We fixed an issue which may cause not being able to login on some devices. Special thanks to Pshpdesu from GitHub.</value>
     <comment>更新内容</comment>
   </data>
   <data name="PopupTitle" xml:space="preserve">
-    <value>バージョンV1.4.4β更新されたコンテンツ</value>
+    <value>バージョンV1.4.5β更新されたコンテンツ</value>
     <comment>更新内容弹出标题</comment>
   </data>
   <data name="comboLoadPolicy.Header" xml:space="preserve">
@@ -506,5 +506,8 @@
   <data name="重设.Content" xml:space="preserve">
     <value>Reset</value>
     <comment>重设</comment>
+  </data>
+  <data name="gotoBox.PlaceholderText" xml:space="preserve">
+    <value />
   </data>
 </root>
