@@ -1,13 +1,13 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
+# Blend for Visual Studio 15
 VisualStudioVersion = 15.0.27004.2005
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PixivWPF", "PixivWPF\PixivWPF.csproj", "{7D82D749-454A-4B22-AA71-FCB1C1215749}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PixivUWP", "PixivUWP\PixivUWP.csproj", "{8E25D187-CD30-4D52-9F76-612DF82575E2}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PixivAPI", "PixivAPI\PixivAPI.csproj", "{64A77199-1953-453A-9F5E-E387FB022B9D}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PixivAPI", "PixivAPI\PixivAPI.csproj", "{64A77199-1953-453A-9F5E-E387FB022B9D}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TileBackground", "TileBackground\TileBackground.csproj", "{F3C2F113-B59D-42EE-B3C0-08646A8056E8}"
 EndProject
