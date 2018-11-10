@@ -52,7 +52,7 @@ namespace PixivUWP.Pages.DetailPage
             flipview.ItemsSource = work.meta_pages;
             flipview.SelectedIndex = 0;
         }
-        Dictionary<Image, System.Threading.CancellationTokenSource> tokens = new Dictionary<Image, System.Threading.CancellationTokenSource>();
+        Dictionary<Image, (System.Threading.CancellationTokenSource, System.Threading.SemaphoreSlim)> tokens = new Dictionary<Image, (System.Threading.CancellationTokenSource, System.Threading.SemaphoreSlim)>();
         private async void Image_DataContextChanged(FrameworkElement sender, DataContextChangedEventArgs args)
         {
             var page=args.NewValue as MetaPages;
@@ -63,13 +63,14 @@ namespace PixivUWP.Pages.DetailPage
                     img.Source = null;
                     if (pl.FindName("pro") is ProgressRing pro)
                     {
-                        var cancellationTokenSource = new System.Threading.CancellationTokenSource();
+                        var cancellationTokenSource = new System.Threading.CancellationTokenSource();                     
                         if (tokens.TryGetValue(img, out var token))
                         {
-                            token.Cancel();
-                            tokens.Remove(img);
+                            token.Item1.Cancel();
+                            await token.Item2.WaitAsync();
                         }
-                        tokens.Add(img, cancellationTokenSource);
+                        var semaphore = new System.Threading.SemaphoreSlim(0,1);
+                        tokens.Add(img, (cancellationTokenSource,semaphore));
                         ProgressBarVisualHelper.SetYFHelperVisibility(pro, true);
                         try
                         {
@@ -97,6 +98,7 @@ namespace PixivUWP.Pages.DetailPage
                         {
                             ProgressBarVisualHelper.SetYFHelperVisibility(pro, false);
                             tokens.Remove(img);
+                            semaphore.Release();
                         }
                     }
                 }
