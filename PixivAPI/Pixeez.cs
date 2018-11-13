@@ -180,13 +180,13 @@ namespace Pixeez
         {
             this.AccessToken = accessToken;
         }
-        public async Task<AsyncResponse> SendRequestWithAuthAsync(MethodType type, string url, IDictionary<string, string> param = null, IDictionary<string, string> headers = null)
+        public async Task<AsyncResponse> SendRequestWithAuthAsync(MethodType type, string url, IDictionary<string, string> param = null, IDictionary<string, string> headers = null, System.Threading.CancellationToken cancellationToken = default)
         {
             var httpClient = new HttpClient();
             httpClient.DefaultRequestHeaders.Add("Referer", "http://spapi.pixiv.net/");
             httpClient.DefaultRequestHeaders.Add("User-Agent", "PixivIOSApp/5.8.7");
             httpClient.DefaultRequestHeaders.Add("Authorization", "Bearer " + this.AccessToken);
-            return await SendRequestWithoutHeaderAsync(type, url, param, headers, httpClient);
+            return await SendRequestWithoutHeaderAsync(type, url, param, headers, httpClient,cancellationToken);
         }
         public async Task<AsyncResponse> SendRequestToGetImageAsync(MethodType type, string url, IDictionary<string, string> param = null, IDictionary<string, string> headers = null)
         {
@@ -207,7 +207,7 @@ namespace Pixeez
             return await SendRequestWithoutHeaderAsync(type, url, param, headers, httpClient);
         }
 
-        private static async Task<AsyncResponse> SendRequestWithoutHeaderAsync(MethodType type, string url, IDictionary<string, string> param, IDictionary<string, string> headers, HttpClient httpClient)
+        private static async Task<AsyncResponse> SendRequestWithoutHeaderAsync(MethodType type, string url, IDictionary<string, string> param, IDictionary<string, string> headers, HttpClient httpClient, System.Threading.CancellationToken cancellationToken = default)
         {
             if (headers != null)
             {
@@ -221,7 +221,7 @@ namespace Pixeez
             {
                 var reqParam = new FormUrlEncodedContent(param);
                 //reqParam.Headers.ContentType=""
-                var response = await httpClient.PostAsync(url, reqParam);
+                var response = await httpClient.PostAsync(url, reqParam, cancellationToken);
                 asyncResponse = new AsyncResponse(response);
             }
             else if (type == MethodType.DELETE)
@@ -243,7 +243,7 @@ namespace Pixeez
                     uri += query_string;
                 }
 
-                var response = await httpClient.DeleteAsync(uri);
+                var response = await httpClient.DeleteAsync(uri,cancellationToken);
                 asyncResponse = new AsyncResponse(response);
             }
             else
@@ -265,7 +265,7 @@ namespace Pixeez
                     uri += query_string;
                 }
 
-                var response = await httpClient.GetAsync(uri);
+                var response = await httpClient.GetAsync(uri,cancellationToken);
                 string vl = response.Content.Headers.ContentEncoding.FirstOrDefault();
                 if (vl != null && vl=="gzip")
                 {
@@ -401,9 +401,9 @@ string offset = null, bool? include_ranking_illusts = null, string bookmark_illu
         /// <para>- <c>IDictionary</c> header (optional)</para>
         /// </summary>
         /// <returns>AsyncResponse.</returns>
-        public async Task<AsyncResponse> SendRequestAsync(MethodType type, string url, IDictionary<string, string> param = null, IDictionary<string, string> headers = null)
+        public async Task<AsyncResponse> SendRequestAsync(MethodType type, string url, IDictionary<string, string> param = null, IDictionary<string, string> headers = null,System.Threading.CancellationToken cancellationToken=default)
         {
-            return await SendRequestWithAuthAsync(type, url, param, headers);
+            return await SendRequestWithAuthAsync(type, url, param, headers,cancellationToken);
         }
 
         private async Task<T> AccessApiAsync<T>(MethodType type, string url, IDictionary<string, string> param, IDictionary<string, string> headers = null) where T : class
