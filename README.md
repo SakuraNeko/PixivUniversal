@@ -9,7 +9,7 @@
 
 使用 Visual Studio 2017 或更高版本打开该项目的sln文件
 
-如果无法编译，您可能需要安装16299版本的 UWP SDK 以及 [Microsoft Store Services SDK](http://aka.ms/store-em-sdk)
+如果无法编译，您可能需要安装17134版本的 UWP SDK 以及 [Microsoft Store Services SDK](http://aka.ms/store-em-sdk)
 
 ### 许可
 
