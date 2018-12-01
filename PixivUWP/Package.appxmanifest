@@ -16,7 +16,7 @@ You should have received a copy of the GNU General Public License
 along with this program; if not, write to the Free Software
 Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.-->
 <Package xmlns="http://schemas.microsoft.com/appx/manifest/foundation/windows10" xmlns:mp="http://schemas.microsoft.com/appx/2014/phone/manifest" xmlns:uap="http://schemas.microsoft.com/appx/manifest/uap/windows10" xmlns:uap4="http://schemas.microsoft.com/appx/manifest/uap/windows10/4" IgnorableNamespaces="uap mp">
-  <Identity Name="18416PixeezPlusProject.PixivUWP" Publisher="CN=1A1912C0-F77F-4F6F-B8BA-0DF953939E75" Version="1.4.5.0" />
+  <Identity Name="PixeezPlusProject.PixivUWP" Publisher="CN=1A1912C0-F77F-4F6F-B8BA-0DF953939E75" Version="1.4.5.0" />
   <mp:PhoneIdentity PhoneProductId="5e2ba6da-0419-4b82-8f83-dd58cca931b4" PhonePublisherId="00000000-0000-0000-0000-000000000000" />
   <Properties>
     <DisplayName>Pixiv UWP</DisplayName>
