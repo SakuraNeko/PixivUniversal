@@ -52,6 +52,7 @@ namespace PixivUWP.Pages.DetailPage
             flipview.ItemsSource = work.meta_pages;
             flipview.SelectedIndex = 0;
         }
+        Dictionary<string, WeakReference<Windows.UI.Xaml.Media.Imaging.BitmapImage>> imagecache = new Dictionary<string, WeakReference<Windows.UI.Xaml.Media.Imaging.BitmapImage>>();
         Dictionary<Image, (System.Threading.CancellationTokenSource, System.Threading.SemaphoreSlim)> tokens = new Dictionary<Image, (System.Threading.CancellationTokenSource, System.Threading.SemaphoreSlim)>();
         private async void Image_DataContextChanged(FrameworkElement sender, DataContextChangedEventArgs args)
         {
@@ -74,17 +75,39 @@ namespace PixivUWP.Pages.DetailPage
                         ProgressBarVisualHelper.SetYFHelperVisibility(pro, true);
                         try
                         {
-                            using (var stream = await Data.TmpData.CurrentAuth.Tokens.SendRequestAsync(Pixeez.MethodType.GET, page.ImageUrls.Original ?? page.ImageUrls.Large ?? 
-                                page.ImageUrls.Medium,cancellationToken: cancellationTokenSource.Token))
+                            var url = page.ImageUrls.Original ?? page.ImageUrls.Large ?? page.ImageUrls.Medium;
+                            async Task<Windows.UI.Xaml.Media.Imaging.BitmapImage> getimg()
                             {
-                                var bitmap = new Windows.UI.Xaml.Media.Imaging.BitmapImage();
-                                cancellationTokenSource.Token.ThrowIfCancellationRequested();
-                                var stream2 = (await stream.GetResponseStreamAsync()).AsRandomAccessStream();
-                                cancellationTokenSource.Token.ThrowIfCancellationRequested();
-                                await bitmap.SetSourceAsync(stream2);
-                                cancellationTokenSource.Token.ThrowIfCancellationRequested();
-                                img.Source = bitmap;
+                                using (var stream = await Data.TmpData.CurrentAuth.Tokens.SendRequestAsync(Pixeez.MethodType.GET, url, cancellationToken: cancellationTokenSource.Token))
+                                {
+                                    var bitmap = new Windows.UI.Xaml.Media.Imaging.BitmapImage();
+                                    cancellationTokenSource.Token.ThrowIfCancellationRequested();
+                                    var stream2 = (await stream.GetResponseStreamAsync()).AsRandomAccessStream();
+                                    cancellationTokenSource.Token.ThrowIfCancellationRequested();
+                                    await bitmap.SetSourceAsync(stream2);
+                                    cancellationTokenSource.Token.ThrowIfCancellationRequested();
+                                    return bitmap;
+                                }
                             }
+                            Windows.UI.Xaml.Media.Imaging.BitmapImage bitmapImage;
+                            if (imagecache.TryGetValue(url,out var weakReference))
+                            {
+                                if(weakReference.TryGetTarget(out bitmapImage))
+                                {
+                                    img.Source = bitmapImage;
+                                }
+                                else
+                                {
+                                    bitmapImage = await getimg();
+                                    weakReference.SetTarget(bitmapImage);                                
+                                }
+                            }
+                            else
+                            {
+                                bitmapImage = await getimg();
+                                imagecache[url] = new WeakReference<Windows.UI.Xaml.Media.Imaging.BitmapImage>(bitmapImage);
+                            }
+                            img.Source = bitmapImage;
                         }
                         catch(OperationCanceledException)
                         {
