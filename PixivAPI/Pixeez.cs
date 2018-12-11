@@ -127,7 +127,7 @@ namespace Pixeez
         /// <para>- <c>string</c> password (required)</para>
         /// </summary>
         /// <returns>Tokens.</returns>
-        public static async Task<AuthResult> AuthorizeAsync(string username, string password, string refreshtoken, string devicetoken)
+        public static async Task<AuthResult> AuthorizeAsync(string username, string password, string refreshtoken, string devicetoken="")
         {
             var httpClient = new HttpClient();
             httpClient.DefaultRequestHeaders.Add(AuthConsts.AppOS.Item1, AuthConsts.AppOS.Item2);
