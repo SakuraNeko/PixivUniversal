@@ -168,7 +168,7 @@ namespace Pixeez
             var result = new Pixeez.AuthResult();
             result.Authorize = authorize;
             result.Key = new AuthKey() { Password = password, Username = username, KeyExpTime = authorize.ExpiresIn.HasValue ? DateTime.UtcNow.AddSeconds(authorize.ExpiresIn.Value) : default };
-            result.Tokens = new Tokens(authorize.AccessToken) { RefreshToken = authorize.RefreshToken };
+            result.Tokens = new Tokens(authorize.AccessToken) { RefreshToken = authorize.RefreshToken, KeyExpTime = authorize.ExpiresIn.HasValue ? DateTime.UtcNow.AddSeconds(authorize.ExpiresIn.Value):default };
             return result;
         }
 
@@ -186,16 +186,31 @@ namespace Pixeez
         public string AccessToken { get; private set; }
         [Newtonsoft.Json.JsonConstructor]
         private Tokens() { }
+        [Newtonsoft.Json.JsonProperty]
+        public DateTime KeyExpTime { get; set; }
+
         internal Tokens(string accessToken)
         {
             this.AccessToken = accessToken;
         }
+
+        private async Task CheckAuthorizationAsync()
+        {
+            if (DateTime.UtcNow >= this.KeyExpTime)
+            {
+                var token = await Auth.AuthorizeAsync("", "", RefreshToken);
+                this.RefreshToken = token.Tokens.RefreshToken;
+                this.AccessToken = token.Tokens.AccessToken;
+                this.KeyExpTime = token.Tokens.KeyExpTime;
+            }
+        }
         public async Task<AsyncResponse> SendRequestWithAuthAsync(MethodType type, string url, IDictionary<string, string> param = null, IDictionary<string, string> headers = null, System.Threading.CancellationToken cancellationToken = default)
         {
+            await CheckAuthorizationAsync();
+
             var httpClient = new HttpClient();
             httpClient.DefaultRequestHeaders.Add("Referer", "http://spapi.pixiv.net/");
             httpClient.DefaultRequestHeaders.Add(AuthConsts.UserAgent.Item1, AuthConsts.UserAgent.Item2);
-
             httpClient.DefaultRequestHeaders.Add("Authorization", "Bearer " + this.AccessToken);
             return await SendRequestWithoutHeaderAsync(type, url, param, headers, httpClient, cancellationToken);
         }
@@ -214,7 +229,11 @@ namespace Pixeez
             httpClient.DefaultRequestHeaders.Add(AuthConsts.UserAgent.Item1, AuthConsts.UserAgent.Item2);
             httpClient.DefaultRequestHeaders.AcceptEncoding.TryParseAdd("gzip");
             httpClient.DefaultRequestHeaders.AcceptLanguage.TryParseAdd("zh_CN");
-            if (needauth) httpClient.DefaultRequestHeaders.Add("Authorization", "Bearer " + this.AccessToken);
+            if (needauth)
+            {
+                await CheckAuthorizationAsync();
+                httpClient.DefaultRequestHeaders.Add("Authorization", "Bearer " + this.AccessToken);
+            }
             return await SendRequestWithoutHeaderAsync(type, url, param, headers, httpClient);
         }
 
