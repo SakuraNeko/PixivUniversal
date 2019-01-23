@@ -110,9 +110,9 @@ namespace Pixeez
     {
         public static Tuple<string, string> AppOS => new Tuple<string, string>("App-OS", "ios");
         public static Tuple<string, string> AcceptLanguage => new Tuple<string, string>("Accept-Language", "en-us");
-        public static Tuple<string, string> AppOSVersion => new Tuple<string, string>("App-OS-Version", "12.0.1");
-        public static Tuple<string, string> AppVersion => new Tuple<string, string>("App-Version", "7.2.2");
-        public static Tuple<string, string> UserAgent => new Tuple<string, string>("User-Agent", "PixivIOSApp/7.2.2 (iOS 12.0.1; iPhone8,2)");
+        public static Tuple<string, string> AppOSVersion => new Tuple<string, string>("App-OS-Version", "10.2.1");
+        public static Tuple<string, string> AppVersion => new Tuple<string, string>("App-Version", "7.1.0");
+        public static Tuple<string, string> UserAgent => new Tuple<string, string>("User-Agent", "PixivIOSApp/7.1.0 (iOS 10.2.1; iPhone8,1)");
         public static Tuple<string, string> GetSecureUrl => new Tuple<string, string>("get_secure_url", "1");
         public static Tuple<string, string> ClientId => new Tuple<string, string>("client_id", "KzEZED7aC0vird8jWyHM38mXjNTY");
         public static Tuple<string, string> ClientSecret => new Tuple<string, string>("client_secret", "W9JZoJe00qPvJsiyCGT3CCtC6ZUtdpKpzMbNlUGP");
