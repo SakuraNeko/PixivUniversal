@@ -141,7 +141,7 @@ namespace PixivUWP
                 Pixeez.AuthResult token = default;
                 async Task 正常加载tokenAsync()
                 {
-                    token = await Auth.AuthorizeAsync(username, password, null, Data.AppDataHelper.GetDeviceId());
+                    token = await Auth.AuthorizeAsync(username, password, null);
                 }
                 if (Data.AppDataHelper.ContainKey(Data.AppDataHelper.RefreshTokenKey))
                 {
@@ -154,7 +154,7 @@ namespace PixivUWP
                             //token 已过期
                             try
                             {
-                                token = await Auth.AuthorizeAsync(username, password, token.Authorize.RefreshToken, Data.AppDataHelper.GetDeviceId());
+                                token = await Auth.AuthorizeAsync(username, password, token.Authorize.RefreshToken);
                             }
                             catch
                             {

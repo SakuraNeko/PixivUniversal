@@ -85,7 +85,7 @@ namespace TileBackground
                 Pixeez.AuthResult token;
                 async System.Threading.Tasks.Task 正常加载tokenAsync()
                 {
-                    token = await Auth.AuthorizeAsync(username, password, null, AppDataHelper.GetDeviceId());
+                    token = await Auth.AuthorizeAsync(username, password, null);
                 }
                 token = AppDataHelper.ContainKey(AppDataHelper.RefreshTokenKey) ? Newtonsoft.Json.JsonConvert.DeserializeObject<Pixeez.AuthResult>(AppDataHelper.GetValue(AppDataHelper.RefreshTokenKey).ToString()) : default;
                 if (username == token.Key.Username && password == token.Key.Password)
@@ -96,7 +96,7 @@ namespace TileBackground
                         //token 已过期
                         try
                         {
-                            token = await Auth.AuthorizeAsync(username, password, token.Authorize.RefreshToken, AppDataHelper.GetDeviceId());
+                            token = await Auth.AuthorizeAsync(username, password, token.Authorize.RefreshToken);
                         }
                         catch
                         {
