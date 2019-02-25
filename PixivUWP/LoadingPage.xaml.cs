@@ -39,6 +39,7 @@ using Windows.UI.Notifications;
 using Pixeez;
 using System.Threading.Tasks;
 using Windows.UI.Xaml.Media.Imaging;
+using Windows.System;
 
 //“空白页”项模板在 http://go.microsoft.com/fwlink/?LinkId=402352&clcid=0x409 上有介绍
 
@@ -200,6 +201,7 @@ namespace PixivUWP
 
         private async void status_Click(object sender, RoutedEventArgs e)
         {
+            await Launcher.LaunchUriAsync(new Uri(@"https://github.com/PixeezPlusProject/PixivUniversal/blob/developing/TroubleShoot.md"));
             await rollBackAnimation();
         }
 
