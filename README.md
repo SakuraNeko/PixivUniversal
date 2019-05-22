@@ -1,5 +1,7 @@
 ## Pixiv通用客户端
 
+## 所有开发转向 [pixivfs-uwp](https://github.com/tobiichiamane/pixivfs-uwp)
+
 [![Build status](https://ci.appveyor.com/api/projects/status/5f0blsx5erxga6so?svg=true)](https://ci.appveyor.com/project/yinyue200/pixivuniversal)
 
 ### 简介
